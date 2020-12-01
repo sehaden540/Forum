@@ -2,20 +2,22 @@
 <html lang="en">
 
 <head>
+    <script src="forum.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Post</title>
 </head>
 
 <body>
-    <div class="input-group">
-        <input type="text" placeholder="Subject" class="form-control" cols="100">
-    </div><br>
-    <div class="input-group">
-        <textarea placeholder="Message" class="form-control" id="exampleFormControlTextarea1" rows="25"
-            cols="100"></textarea>
-    </div><br>
-    <input class="btn btn-primary" type="submit" value="Submit">
+    <form onsubmit='return submitForm(event)'>
+        <div class="input-group">
+            <input type="text" placeholder="Subject" class="form-control" id="subject" cols="100">
+        </div><br>
+        <div class="input-group">
+            <textarea placeholder="Message" class="form-control" id="message" rows="25"
+                cols="100"></textarea>
+        </div><br>
+        <input class="btn btn-primary" type="submit" value="Submit">
     </form>
 </body>
 
