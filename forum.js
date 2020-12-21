@@ -1,11 +1,50 @@
+//function that allowed for the posts to be uploaded into local storage
 function submitForm(event) {
     event.preventDefault();
     var subject = document.getElementById("subject").value;
     var message = document.getElementById("message").value;
     var post = {
-        subject:subject, message:message
+        subject: subject, message: message
     }
-    localStorage.setItem("posts",JSON.stringify(post))
-    console.log (post);
+    let posts = JSON.parse(localStorage.getItem("posts"));
+    if (!posts) {
+        posts = {
+            allPosts: []
+        }
+    }
+    posts["allPosts"].push(post)
+    localStorage.setItem("posts", JSON.stringify(posts))
+    //console.log(post);
     return false;
+}
+
+//function that allows for the posts submitted to be loaded on the main Forum page
+function loadPosts() {
+    removeAllChildNodes(document.getElementById("posts")); //this removes all elements so we do not see duplicate posts on the screen
+    var tree = document.createDocumentFragment();
+    const post = JSON.parse(localStorage.getItem("posts"))
+    for (let i = 0; i < post.allPosts.length; i++) {
+        var textMessage = document.createElement("p");
+        //textMessage.setAttribute("id", "id1");
+        textMessage.appendChild(document.createTextNode(post.allPosts[i].message));
+
+        var textSubject = document.createElement("p");
+        //textSubject.setAttribute("id", "id2")
+        textSubject.appendChild(document.createTextNode(post.allPosts[i].subject));
+
+        tree.appendChild(textSubject);
+        tree.appendChild(textMessage);
+    }
+    // var text2 = document.createElement("a");
+    // text2.setAttribute("href", "https://www.google.com");
+    // text2.appendChild(document.createTextNode("Link to Google"));
+    // tree.appendChild(text2);
+    document.getElementById("posts").appendChild(tree);
+}
+
+//function that removes all elements
+function removeAllChildNodes(parent) { 
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
