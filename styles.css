@@ -1,0 +1,17 @@
+.navbar {
+    background-color: #6a00ff;
+}
+
+.navbar-text h1 {
+    color: white;
+}
+
+.Load-Button {
+    background-color: #6a00ff;
+    color: white; 
+    margin-top: 10px
+}
+
+.Load-Button:hover {
+    color: #e9ecef;
+}
