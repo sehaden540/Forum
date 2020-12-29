@@ -8,18 +8,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Post</title>
+    <script src="https://cdn.tiny.cloud/1/d4afzjk6dnejrfrg1aeduynk9tk7svnn7zl3n69mo8u1feyo/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <!-- Bootstrap Scripts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tinymce.init({
+            selector: '#message',
+            menubar: false,
+            invalid_styles: 'font-family',
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+            }
+        });
+    </script>
 </head>
 
 <body>
-    <form onsubmit='return submitForm(event)'>
+    <nav class="navbar navbar-light">
+        <span class="navbar-text">
+            <h1>Create A Post</h1>
+        </span>
+    </nav>
+    <form onsubmit='return submitForm(event)' method="POST">
         <div class="input-group">
-            <input type="text" placeholder="Subject" class="form-control" id="subject" cols="100">
+            <input type="text" placeholder="Subject" class="form-control" id="subject">
         </div><br>
-        <div class="input-group">
-            <textarea placeholder="Message" class="form-control" id="message" rows="25"
-                cols="100"></textarea>
+        <div class="input-group2">
+            <textarea placeholder="Message" id="message" rows="25"></textarea>
         </div><br>
-        <input class="btn btn-primary" type="submit" value="Submit">
+        <input class="btn btn-submit" type="submit" value="Submit">
     </form>
 </body>
 

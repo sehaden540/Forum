@@ -14,8 +14,8 @@ function submitForm(event) {
     }
     posts["allPosts"].push(post)
     localStorage.setItem("posts", JSON.stringify(posts))
-    //console.log(post);
-    window.location.href = "file:///C:/Users/sgall/Documents/Web%20Development/Forum/index.html" ;
+    window.location.href = "file:///C:/Users/sgall/Documents/Web%20Development/Forum/index.html";
+
 }
 
 //function that allows for the posts submitted to be loaded on the main Forum page
@@ -23,7 +23,7 @@ function loadPosts() {
     removeAllChildNodes(document.getElementById("posts")); //this removes all elements so we do not see duplicate posts on the screen
     var tree = document.createDocumentFragment();
     const post = JSON.parse(localStorage.getItem("posts"))
-    for (let i = post.allPosts.length-1; i >= 0; i--) {
+    for (let i = post.allPosts.length - 1; i >= 0; i--) {
         var cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         var cardBody = document.createElement("div");
@@ -32,7 +32,7 @@ function loadPosts() {
         var textMessage = document.createElement("p");
         textMessage.classList.add("card-text");
         //textMessage.setAttribute("id", "id1");
-        textMessage.appendChild(document.createTextNode(post.allPosts[i].message));
+        textMessage.insertAdjacentHTML('beforeend', post.allPosts[i].message);
 
         var textSubject = document.createElement("p");
         textSubject.classList.add("card-title");
@@ -44,10 +44,6 @@ function loadPosts() {
         cardDiv.appendChild(cardBody);
         tree.appendChild(cardDiv);
     }
-    // var text2 = document.createElement("a");
-    // text2.setAttribute("href", "https://www.google.com");
-    // text2.appendChild(document.createTextNode("Link to Google"));
-    // tree.appendChild(text2);
     document.getElementById("posts").appendChild(tree);
 }
 

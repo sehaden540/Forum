@@ -19,7 +19,7 @@
 .card {
     margin: 3rem 5rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    font-family: 'Montserrat' , sans-serif;
+    font-family: 'Montserrat' , sans-serif !important;
 }
 
 .card-title {
@@ -29,4 +29,21 @@
 
 .card-text {
     padding-top: 1rem;
+}
+
+.input-group {
+    width: 50%;
+}
+
+.input-group2 {
+    width: 80%;
+}
+
+form {
+    margin-top: 2rem;
+    margin-left: 3rem;
+}
+.btn-submit {
+    background-color:#6a00ff;
+    color: white
 }
