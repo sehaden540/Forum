@@ -15,8 +15,11 @@ function submitForm(event) {
     posts["allPosts"].push(post)
     localStorage.setItem("posts", JSON.stringify(posts))
     window.location.href = "file:///C:/Users/sgall/Documents/Web%20Development/Forum/index.html";
-
 }
+
+window.onload = function () {
+    loadPosts();
+};
 
 //function that allows for the posts submitted to be loaded on the main Forum page
 function loadPosts() {
@@ -53,3 +56,8 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.firstChild);
     }
 }
+
+setInterval(function () {
+    loadPosts();
+}, 30000); 
+
