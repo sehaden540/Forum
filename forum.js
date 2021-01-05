@@ -1,10 +1,12 @@
-//function that allowed for the posts to be uploaded into local storage
+//function that creates and allows for new posts to be uploaded into local storage
 function submitForm(event) {
     event.preventDefault();
     var subject = document.getElementById("subject").value;
     var message = document.getElementById("message").value;
     var post = {
-        subject: subject, message: message
+        subject: subject,
+        message: message,
+        likes: 0
     }
     let posts = JSON.parse(localStorage.getItem("posts"));
     if (!posts) {
@@ -21,6 +23,39 @@ window.onload = function () {
     loadPosts();
 };
 
+function createMessage(message) {
+    var textMessage = document.createElement("p");
+    textMessage.classList.add("card-text");
+    //textMessage.setAttribute("id", "id1");
+    textMessage.insertAdjacentHTML('beforeend', message);
+    return textMessage
+}
+
+function createSubject(subject) {
+    var textSubject = document.createElement("p");
+    textSubject.classList.add("card-title");
+    //textSubject.setAttribute("id", "id2")
+    textSubject.appendChild(document.createTextNode(subject));
+    return textSubject
+}
+
+function createLike() {
+    var button = document.createElement("button");
+    button.innerHTML = "Like";
+    button.classList.add("btn")
+    button.classList.add("like-button");
+    return button
+}
+
+function createReply() {
+    var button = document.createElement("button");
+    button.innerHTML = "Reply";
+    button.classList.add("btn")
+    button.classList.add("btn-outline-light")
+    button.classList.add("reply-button");
+    return button
+}
+
 //function that allows for the posts submitted to be loaded on the main Forum page
 function loadPosts() {
     removeAllChildNodes(document.getElementById("posts")); //this removes all elements so we do not see duplicate posts on the screen
@@ -32,18 +67,15 @@ function loadPosts() {
         var cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
 
-        var textMessage = document.createElement("p");
-        textMessage.classList.add("card-text");
-        //textMessage.setAttribute("id", "id1");
-        textMessage.insertAdjacentHTML('beforeend', post.allPosts[i].message);
-
-        var textSubject = document.createElement("p");
-        textSubject.classList.add("card-title");
-        //textSubject.setAttribute("id", "id2")
-        textSubject.appendChild(document.createTextNode(post.allPosts[i].subject));
+        var textMessage = createMessage(post.allPosts[i].message);
+        var textSubject = createSubject(post.allPosts[i].subject);
+        var likeButton = createLike(); 
+        var replyButton = createReply();
 
         cardBody.appendChild(textSubject);
         cardBody.appendChild(textMessage);
+        cardBody.appendChild(likeButton);
+        cardBody.appendChild(replyButton);
         cardDiv.appendChild(cardBody);
         tree.appendChild(cardDiv);
     }
@@ -59,5 +91,5 @@ function removeAllChildNodes(parent) {
 
 setInterval(function () {
     loadPosts();
-}, 30000); 
+}, 30000);
 
