@@ -39,12 +39,18 @@ function createSubject(subject) {
     return textSubject
 }
 
-function createLike() {
+function createLike(likes) {
+    var buttonDiv = document.createElement("div");
+    var like = document.createElement("p")
+    like.innerHTML = likes;
     var button = document.createElement("button");
     button.innerHTML = "Like";
-    button.classList.add("btn")
+    button.classList.add("btn");
     button.classList.add("like-button");
-    return button
+    buttonDiv.classList.add("like-div");
+    buttonDiv.appendChild(like);
+    buttonDiv.appendChild(button);
+    return buttonDiv
 }
 
 function createReply() {
@@ -69,7 +75,7 @@ function loadPosts() {
 
         var textMessage = createMessage(post.allPosts[i].message);
         var textSubject = createSubject(post.allPosts[i].subject);
-        var likeButton = createLike(); 
+        var likeButton = createLike(post.allPosts[i].likes); 
         var replyButton = createReply();
 
         cardBody.appendChild(textSubject);
