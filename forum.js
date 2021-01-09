@@ -39,18 +39,26 @@ function createSubject(subject) {
     return textSubject
 }
 
-function createLike(likes) {
+function createLike(likes, index) {
     var buttonDiv = document.createElement("div");
-    var like = document.createElement("p")
-    like.innerHTML = likes;
+    //var like = document.createElement("p")
+    //like.innerHTML = likes;
     var button = document.createElement("button");
-    button.innerHTML = "Like";
+    button.innerHTML = likes > 0? likes : "Like";
+    button.onclick = () => increaseLikes(index)
     button.classList.add("btn");
     button.classList.add("like-button");
     buttonDiv.classList.add("like-div");
-    buttonDiv.appendChild(like);
+    //buttonDiv.appendChild(like);
     buttonDiv.appendChild(button);
     return buttonDiv
+}
+
+function increaseLikes(index) {
+    var posts = JSON.parse(localStorage.getItem("posts"));
+    posts.allPosts[index].likes +=1;
+    localStorage.setItem('posts', JSON.stringify(posts));
+    loadPosts();
 }
 
 function createReply() {
@@ -75,7 +83,7 @@ function loadPosts() {
 
         var textMessage = createMessage(post.allPosts[i].message);
         var textSubject = createSubject(post.allPosts[i].subject);
-        var likeButton = createLike(post.allPosts[i].likes); 
+        var likeButton = createLike(post.allPosts[i].likes, i); 
         var replyButton = createReply();
 
         cardBody.appendChild(textSubject);

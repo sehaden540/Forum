@@ -53,6 +53,7 @@ form {
     position: absolute;
     right: 100px;
     bottom: 10px;
+    text-align: center;
 }
 
 .like-button {
